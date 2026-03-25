@@ -1,5 +1,13 @@
 # GETA Solutions — E-commerce Platform
 
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
+![Django](https://img.shields.io/badge/Django-5.2-092E20?logo=django&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql&logoColor=white)
+![Stripe](https://img.shields.io/badge/Stripe-Payments-635BFF?logo=stripe&logoColor=white)
+![Tests](https://img.shields.io/badge/Tests-595%2B-brightgreen)
+![CI](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)
+
 **[getasolutions.fr](https://getasolutions.fr)** — Plateforme e-commerce B2C/B2B spécialisée dans les pneumatiques utilitaires et poids lourds, avec extension multi-verticale (pièces détachées, transport, location).
 
 Projet conçu, développé et déployé en solo — du design à la mise en production.
@@ -219,8 +227,31 @@ class Command(BaseCommand):
 
 ---
 
+## Défis techniques
+
+### Panier unifié cross-verticale
+Le site vend des produits de natures très différentes (pneus, pièces détachées TecDoc, services). Le défi était de permettre un **panier unique** mélangeant ces types, avec un checkout Stripe commun et un calcul de frais de port différencié (forfait pour les pneus, calcul au poids pour les pièces). Solution : `CartItem` avec FK nullables vers chaque type de produit, et logique de shipping polymorphe.
+
+### Intégration TecDoc en temps réel
+Le catalogue pièces détachées interroge l'API TecDoc / TecAlliance (Pegasus 3.0) en live — recherche par plaque d'immatriculation, navigation par catégorie véhicule, fiches articles. Le challenge : gérer la latence d'une API tierce dans un parcours utilisateur fluide, avec cache intelligent et fallback gracieux en cas d'indisponibilité.
+
+### Déduplication webhooks Stripe
+En production, Stripe peut renvoyer le même événement plusieurs fois (retries). Sans protection, cela crée des doublons de commandes ou des emails envoyés en double. Solution : modèle `StripeEventProcessed` qui enregistre chaque `event.id` traité, avec vérification atomique avant tout traitement. Zéro doublon en production.
+
+### Workflow devis multi-étapes
+Les verticales transport et location fonctionnent en mode devis (pas de paiement immédiat). Le workflow complet — demande → chiffrage admin → acceptation client → instructions de virement → confirmation de paiement — nécessite une machine à états robuste avec emails transactionnels à chaque transition et tokens d'acceptation sécurisés.
+
+---
+
+## Démo
+
+> *Vidéo courte à venir — parcours checkout et dashboard admin*
+
+---
+
 ## Contact
 
 **Yaniss Amazouz**
 - [getasolutions.fr](https://getasolutions.fr)
 - GitHub : [@YanissAmz](https://github.com/YanissAmz)
+- LinkedIn : [À ajouter]
