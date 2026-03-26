@@ -143,7 +143,7 @@ Projet conçu, développé et déployé en solo — du design à la mise en prod
 
 Le site est entièrement responsive, y compris le dashboard d'administration.
 
-![Mobile](screenshots/mobile.png)
+![Mobile](screenshots/mobile.jpg)
 
 ---
 
