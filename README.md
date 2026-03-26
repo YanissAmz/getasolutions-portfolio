@@ -254,4 +254,4 @@ Les verticales transport et location fonctionnent en mode devis (pas de paiement
 **Yaniss Amazouz**
 - [getasolutions.fr](https://getasolutions.fr)
 - GitHub : [@YanissAmz](https://github.com/YanissAmz)
-- LinkedIn : [À ajouter]
+- LinkedIn : [linkedin.com/in/yaniss-amazouz](https://www.linkedin.com/in/yaniss-amazouz-b7a461204/)
