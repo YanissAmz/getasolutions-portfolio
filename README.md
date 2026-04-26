@@ -12,7 +12,7 @@
 
 Projet conçu, développé et déployé en solo — du design à la mise en production.
 
-![Desktop](screenshots/desktop.png)
+![Desktop](screenshots/desktop.jpg)
 
 ---
 
